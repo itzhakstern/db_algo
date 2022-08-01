@@ -167,13 +167,6 @@ def find_3NF_decomposition(R, F):
             continue
         res2.append(res[i])
     return res2
-    
-
-        
-
-        
-         
-
 
 # אלגוריתם לפירוק BCNF
 def find_BCNF_decomposition(R, F):
@@ -213,7 +206,7 @@ r4 = 'ad'
 f8 = [('ab', 'c'),('d', 'a')]
 
 r5 = 'abce'
-r6 = 'abcdeg'
+r6 = 'abcde'
 f9 = [('eg', 'ab'), ('gc', 'ae'), ('ec', 'bd'), ('ab', 'cdg'), ('e','ag')]
 
 # print(all_keys(r2,f3))
@@ -224,5 +217,6 @@ f9 = [('eg', 'ab'), ('gc', 'ae'), ('ec', 'bd'), ('ab', 'cdg'), ('e','ag')]
 # print(all_keys(r6, f9))
 # print(is_in_bcnf(r6, ff))
 # print(is_in_3nf(r6, ff))
-print(find_BCNF_decomposition(r6,f9))
+# print(find_BCNF_decomposition(r6,f9))
+print(is_dependency_preserving(['bcd', 'ace'], f3))
 
