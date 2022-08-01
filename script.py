@@ -1,5 +1,4 @@
-f = [('ab', 'c'), ('c', 'da'), ('bd', 'c'), ('ad','b')]
-r = 'abcd'
+
 
 
 # F need be an array of tuples 
@@ -8,13 +7,15 @@ def closure(X, F):
     len_v = len(V)
     while True:
         for atr in F:
-            if set(atr[0]).issubset(set(V)) and not set(atr[1]).issubset(set(V)):
+            a = set(atr[0]).issubset(set(V))
+            if a and not set(atr[1]).issubset(set(V)):
                 V = ''.join(set(V+''.join(sorted(atr[1]))))
         if len_v == len(V):
             return V
         len_v = len(V)
 
 # print(closure('c', f))
+# print(closure(r,f))
 
 
 def super_key(X, F, R):
@@ -59,7 +60,7 @@ def all_keys(R, F):
                     key_queue.append(s_min)
     return set(keys)
 
-print(all_keys(r, f))
+# print(all_keys(r, f))
 
 def is_in_bcnf(R, F):
     if len(R) == 2:
@@ -83,7 +84,32 @@ def compute_dependencies_in_projection(R, R_i, F):
 
 # אלגוריתם למציאת כיסוי מינימלי
 def compute_minimal_cover(F):
-    pass
+    G = []
+    for atr in F:
+        for A in atr[1]:
+            G.append((atr[0], A))
+    for i in range(len(G)):
+        for B in G[i][0]:
+            if G[i][1] in closure(G[i][0].replace(B, ''), F):
+                lst_atr = list(G[i])
+                lst_atr[0] = G[i][0].replace(B, '')
+                atr_temp = tuple(lst_atr)
+                G[i] = atr_temp
+    counter = 0
+    len_G = len(G)
+    while len_G:
+        atr = G[counter]
+        G_ = G[:counter] + G[counter+1:]
+        flug = True
+        if atr[1] in closure(atr[0], G_):
+            G = G_
+            flug = False
+        if flug:
+            counter += 1
+        len_G -= 1
+
+
+    return G
 
 # אלגוריתם לפירוק 3NF
 def find_3NF_decomposition(R, F):
@@ -92,3 +118,14 @@ def find_3NF_decomposition(R, F):
 # אלגוריתם לפירוק BCNF
 def find_BCNF_decomposition(R, F):
     pass
+
+# F = [('a','b'),('abcd','e'),('ej','gh'),('acdj','eg')]
+
+f1 = [('a', 'b'), ('acd', 'e'),('ej', 'g'),('ej', 'h'), ('acd', 'e'), ('acdj', 'g')]
+r1 = 'acdj'
+f2 = [('eg', 'ab'), ('gc', 'ae'),('ec', 'db'),('ab', 'cdg'), ('e', 'ag')]
+f3 = [('bc', 'ade'), ('db', 'ace'),('c', 'ad'),('d', 'ce')]
+r2 = "abcde"
+str = ""
+print(all_keys(r2,f3))
+print(compute_minimal_cover(f3))
