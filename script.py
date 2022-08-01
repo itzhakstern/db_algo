@@ -71,3 +71,24 @@ def is_in_3nf(R, F):
     if(is_in_bcnf(R, F)):
         return True
     pass
+
+
+# אלגוריתם לחישוב שימור תלויות
+def id_dependency_preserving(R, sub_R, F):
+    pass
+
+# אלגוריתם לחישוב קבוצת התלויות F_R_i
+def compute_dependencies_in_projection(R, R_i, F):
+    pass
+
+# אלגוריתם למציאת כיסוי מינימלי
+def compute_minimal_cover(F):
+    pass
+
+# אלגוריתם לפירוק 3NF
+def find_3NF_decomposition(R, F):
+    pass
+
+# אלגוריתם לפירוק BCNF
+def find_BCNF_decomposition(R, F):
+    pass
